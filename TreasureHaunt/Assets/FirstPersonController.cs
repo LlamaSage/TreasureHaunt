@@ -11,7 +11,7 @@ public class FirstPersonController : MonoBehaviour
     CharacterController characterController;
     public float speed = 6.0f;
     public float rotationSpeed = 30.0f;
-    public int player;
+    private int player = 1;
     private float rotation;
     private Vector3 moveDirection = Vector3.zero;
 
@@ -32,4 +32,6 @@ public class FirstPersonController : MonoBehaviour
         moveDirection = this.transform.forward * Input.GetAxis("LeftY_P" + player) * speed;
         characterController.Move(moveDirection * Time.deltaTime);
     }
+
+
 }
