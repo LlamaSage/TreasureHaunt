@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
- * Controls movement.
- * Src https://docs.unity3d.com/ScriptReference/CharacterController.Move.html
+ * Controls player movement.
  */
 
 public class PlayerController : MonoBehaviour
 {
     CharacterController characterController;
-    InteractableObject interactableObject;
     public float speed = 6.0f;
-    public int player;
+    public int player; // num of player for controls - works with Project Settings > Input naming scheme
     private Vector3 moveDirection = Vector3.zero;
+    private bool canMove = true; // false if player is frozen in place
+
+    InteractableObject interactableObject;
+    private float minDistance = 1.8f; // min distance from object that it can still be opened
+    private float distance; // distance from openable object
 
     // Start is called before the first frame update
     void Start()
@@ -24,26 +27,37 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Get direction
-        moveDirection.x = Input.GetAxis("LeftX_P" + player) * speed;
-        moveDirection.z = Input.GetAxis("LeftY_P" + player) * speed * -1;
+        if (canMove)
+        {
+            // Get direction
+            moveDirection.x = Input.GetAxis("LeftX_P" + player) * speed * -1;
+            moveDirection.z = Input.GetAxis("LeftY_P" + player) * speed;
 
-        // Move the controller
-        characterController.Move(moveDirection * Time.deltaTime);
+            // Move the controller
+            characterController.Move(moveDirection * Time.deltaTime);
+        }
 
-        // Check if currently opening something
+        // Check if recently collided with an interactableObject
         if (interactableObject != null)
         {
-            // not ideal, but needs to check every player's input
-            if (Input.GetButton("A_P2") || Input.GetButton("A_P3") || Input.GetButton("A_P4"))
+            // Check if close enough to interactableObject to open it
+            distance = Vector3.Distance(this.transform.position, interactableObject.transform.position);
+            if (Input.GetButton("A_P" + player) && (distance < minDistance) && interactableObject.isSearchable())
             {
                 interactableObject.setBeingOpened(true);
+                canMove = false;
+            }
+            else
+            {
+                interactableObject.setBeingOpened(false);
+                canMove = true;
             }
         }
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        // set interactableObject player collided with
         interactableObject = hit.gameObject.GetComponent<InteractableObject>();
     }
 }
