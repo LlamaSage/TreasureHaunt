@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
-
-    public float openProgress = 0.0f;
     public float openSpeed = 5.0f;
+    public bool hasItem;
+    private float openProgress = 0.0f;
     private float maxProgress = 20.0f;
-    private bool isOpen = false;
     private bool beingOpened = false;
     private bool searchable = true;
+    private bool isOpened = false;
     
     // Start is called before the first frame update
     void Start()
@@ -18,11 +18,15 @@ public class InteractableObject : MonoBehaviour
         
     }
 
-    public bool isSearchable()
+    public bool IsSearchable()
     {
         return searchable;
     }
-    public void setBeingOpened(bool var)
+    public bool GetItem()
+    {
+        return isOpened && hasItem;
+    }
+    public void SetBeingOpened(bool var)
     {
         if (searchable)
         {
@@ -49,8 +53,8 @@ public class InteractableObject : MonoBehaviour
 
         if (openProgress >= maxProgress)
         {
-            isOpen = true;
             searchable = false;
+            isOpened = true;
         }
     }
 }
