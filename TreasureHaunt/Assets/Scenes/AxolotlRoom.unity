@@ -13240,7 +13240,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  rotationSpeed: 60
+  boost: 2
+  boostLimit: 20
+  rotationSpeed: 80
 --- !u!143 &502496688
 CharacterController:
   m_ObjectHideFlags: 0

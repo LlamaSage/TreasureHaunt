@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     InteractableObject interactableObject;
     private float minDistance = 1.8f; // min distance from object that it can still be opened
     private float distance; // distance from openable object
-    
 
     // Start is called before the first frame update
     void Start()
@@ -31,8 +30,8 @@ public class PlayerController : MonoBehaviour
         if (canMove)
         {
             // Get direction
-            moveDirection.x = Input.GetAxis("LeftX_P" + player) * speed;
-            moveDirection.z = Input.GetAxis("LeftY_P" + player) * speed * -1;
+            moveDirection.x = Input.GetAxis("LeftX_P" + player) * speed * -1;
+            moveDirection.z = Input.GetAxis("LeftY_P" + player) * speed;
 
             // Move the controller
             characterController.Move(moveDirection * Time.deltaTime);

@@ -9,8 +9,10 @@ using UnityEngine;
 public class FirstPersonController : MonoBehaviour
 {
     CharacterController characterController;
-    public float speed = 6.0f;
-    public float rotationSpeed = 30.0f;
+    public float speed;
+    public float boost;
+    public float boostLimit;
+    public float rotationSpeed;
     private int player = 1;
     private float rotation;
     private Vector3 moveDirection = Vector3.zero;
@@ -29,7 +31,11 @@ public class FirstPersonController : MonoBehaviour
         transform.Rotate(Vector3.up * rotation * Time.deltaTime);
 
         // Movement
-        moveDirection = this.transform.forward * Input.GetAxis("LeftY_P" + player) * speed;
+        moveDirection = this.transform.forward * Input.GetAxis("LeftY_P" + player) * speed * -1;
+        if (Mathf.Abs(rotation) > boostLimit)
+        {
+            moveDirection *= boost;
+        }
         characterController.Move(moveDirection * Time.deltaTime);
     }
 
