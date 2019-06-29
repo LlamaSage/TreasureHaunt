@@ -11,6 +11,7 @@ public class InteractableObject : MonoBehaviour
     private bool beingOpened = false;
     private bool searchable = true;
     private bool isOpened = false;
+    public AudioSource searchNoise;
     
     // Start is called before the first frame update
     void Start()
@@ -42,13 +43,27 @@ public class InteractableObject : MonoBehaviour
             Debug.Log("progress: " + openProgress);
         }
 
+        if(beingOpened)
+        {
+            if (!searchNoise.isPlaying)
+            {
+                searchNoise.Play();
+            }
+        }
+        else
+        {
+            searchNoise.Stop();
+        }
+
         if (beingOpened && searchable)
         {
             openProgress += Time.deltaTime * openSpeed;
+            
         }
         else
         {
             openProgress = 0;
+            gameObject.GetComponent<AudioSource>().Stop();
         }
 
         if (openProgress >= maxProgress)
