@@ -890,7 +890,7 @@ MonoBehaviour:
   tutorialClips:
   - {fileID: 8300000, guid: 1b148ca51c83de049a8a09212381c806, type: 3}
   - {fileID: 8300000, guid: 2d188f4d05e6e994bb42b5b47555dcfc, type: 3}
-  - {fileID: 8300000, guid: f08eb10335a8a7549b1535ce702ce046, type: 3}
+  - {fileID: 8300000, guid: 3cb0d6a845e87bc49af6f854da5b0bb3, type: 3}
   audioManager: {fileID: 275325297}
   mainMenuPanel: {fileID: 85354375}
   returnFocus: {fileID: 1340114205}
