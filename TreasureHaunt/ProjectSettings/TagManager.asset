@@ -17,9 +17,9 @@ TagManager:
   - 
   - Ghost
   - Bounds
-  - 
-  - 
-  - 
+  - InnerWall
+  - ScareArea
+  - Player
   - 
   - 
   - 
