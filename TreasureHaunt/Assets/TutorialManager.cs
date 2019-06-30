@@ -22,6 +22,7 @@ public class TutorialManager : MonoBehaviour
             tutorialScreens[currentIndex].SetActive(false);
             //tutorialScreens[0].SetActive(true);
             mainMenuPanel.SetActive(true);
+            currentIndex = 0;
             this.gameObject.SetActive(false);
         }
         else

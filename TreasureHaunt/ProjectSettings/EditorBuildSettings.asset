@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Starting Screen.unity
     guid: 67ca6c33ee6b2a4489e6ce1eb110bd57
   - enabled: 1
-    path: Assets/Scenes/OtterRoom.unity
-    guid: c8a060bc89b9fc4439d7d3e6b493d5f9
+    path: Assets/Scenes/MainGame.unity
+    guid: caff5864c4949c140ab739bf8025059f
   m_configObjects: {}
