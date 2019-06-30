@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - InnerWall
+  - Ghost
   layers:
   - Default
   - TransparentFX
