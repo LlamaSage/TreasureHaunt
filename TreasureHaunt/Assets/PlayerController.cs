@@ -18,7 +18,13 @@ public class PlayerController : MonoBehaviour
     private float minDistance = 1.8f; // min distance from object that it can still be opened
     private float distance; // distance from openable object
 
-    private Animator animator;  
+    private Animator animator;
+
+    private bool isBeingScared;
+    public float maxScare;
+    public float scareSpeed;
+    private bool beingScared;
+    private float scareAmount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -31,8 +37,24 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+            // Change scare amount if necessary
+        if (isBeingScared)
+        {
+            animator.SetFloat("Fear", scareAmount / maxScare);
+            scareAmount += scareSpeed * Time.deltaTime;
+
+            // check if player is dead
+            if (scareAmount > maxScare)
+            {
+                animator.SetBool("IsDying", true);
+            }
+            Debug.Log("player " + player + " is " + scareAmount + " scared");
+        }
+
+        // Set animator to searching if necessary
         animator.SetBool("IsSearching", searching);
 
+        // Move character; searching locks up movement
         if (!searching)
         {
             // Get direction
@@ -73,9 +95,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void IsBeingScared(bool val)
+    {
+        isBeingScared = val;
+    }
+
+    public void KillPlayer()
+    {
+        if (scareAmount > maxScare)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         // set interactableObject player collided with
         interactableObject = hit.gameObject.GetComponent<InteractableObject>();
     }
+
 }
