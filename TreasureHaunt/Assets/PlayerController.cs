@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
  * Controls player movement.
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private float distance; // distance from openable object
 
     private Animator animator;
+    private Image scareBar;
 
     private bool isBeingScared;
     public float maxScare;
@@ -31,13 +33,13 @@ public class PlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-        
+        scareBar = GameObject.Find("FearBarSprite_P" + player).GetComponent<Image>();
     }
 
     // Update is called once per frame
     void Update()
     {
-            // Change scare amount if necessary
+        // Change scare amount if necessary
         if (isBeingScared)
         {
             animator.SetFloat("Fear", scareAmount / maxScare);
@@ -47,6 +49,10 @@ public class PlayerController : MonoBehaviour
             if (scareAmount > maxScare)
             {
                 animator.SetBool("IsDying", true);
+            }
+            else // update fear bar
+            {
+                scareBar.fillAmount = scareAmount / maxScare;
             }
             Debug.Log("player " + player + " is " + scareAmount + " scared");
         }
