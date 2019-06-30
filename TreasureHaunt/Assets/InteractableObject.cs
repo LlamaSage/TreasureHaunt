@@ -62,7 +62,6 @@ public class InteractableObject : MonoBehaviour
         }
         else
         {
-            openProgress = 0;
             gameObject.GetComponent<AudioSource>().Stop();
         }
 

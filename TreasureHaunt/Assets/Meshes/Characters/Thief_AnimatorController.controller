@@ -39,6 +39,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: ItemFound
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsSearching
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -9011204114717967283}
   m_Solo: 0
@@ -355,7 +358,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -9011204114717967283}
-    m_Position: {x: 240, y: 120, z: 0}
+    m_Position: {x: 240, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -191244522934000543}
     m_Position: {x: 550, y: 110, z: 0}

@@ -19,8 +19,10 @@ public class PlayerController : MonoBehaviour
     private float minDistance = 1.8f; // min distance from object that it can still be opened
     private float distance; // distance from openable object
 
+    public Sprite keySprite;
     private Animator animator;
     private Image scareBar;
+    private Image key;
 
     private bool isBeingScared;
     public float maxScare;
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         scareBar = GameObject.Find("FearBarSprite_P" + player).GetComponent<Image>();
+        key = GameObject.Find("Key_P" + player).GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -85,6 +88,10 @@ public class PlayerController : MonoBehaviour
         {
             // Check if chest has been opened & has item
             animator.SetBool("ItemFound", interactableObject.GetItem());
+            if (interactableObject.GetItem())
+            {
+                key.sprite = keySprite;
+            }
 
             // Check if close enough to interactableObject to open it
             distance = Vector3.Distance(this.transform.position, interactableObject.transform.position);
